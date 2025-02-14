@@ -1,0 +1,44 @@
+.modal .image-slider {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.modal .image-slider .move-buttons-container {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.modal .image-slider:hover .move-buttons-container {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.modal .modal-image {
+    margin: 0 0 0 2%;
+    max-width: 96%;
+    max-height: 80vh;
+    border-radius: 10px;
+    object-fit: contain;
+}
+
+@media (max-width: 1024px) {
+    .modal .image-slider {
+        margin-top: 2rem;
+    }
+
+    .modal .image-slider img {
+        max-height: 50vh;
+        border-radius: 5% !important;
+    }
+}
+
+@media (max-width: 600px) {
+    .modal .image-slider img {
+        max-height: 35vh !important;
+    }
+}
