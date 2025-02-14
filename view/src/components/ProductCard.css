@@ -297,7 +297,7 @@
 
 @media (max-width: 600px) {
     .product-card-container {
-        width: 77vw !important;
+        width: 90vw !important;
     }
 
     .product-card-container .photo img {
