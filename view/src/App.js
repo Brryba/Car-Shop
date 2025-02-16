@@ -83,7 +83,7 @@ function App() {
                         "Пробег: 20000 км"]}
                     other={["Тип: Седан",
                         "Топливо: Бензин",
-                        "Цвет: Черный"]}
+                        "Цвет: Белый"]}
                     price={"18,300 $"}
                     image={"./images/car5/pic1.png"}
                     images={["./images/car5/pic1.png",
