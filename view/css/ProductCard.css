@@ -5,7 +5,7 @@
 .products {
     display: flex;
     flex-wrap: wrap;
-    margin: 5vh 3vw;
+    margin: 5vh 2vw;
 }
 
 .product-card-container h2 {
@@ -87,141 +87,6 @@
     font-weight: normal;
 }
 
-.modal-background {
-    z-index: 10000;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal {
-    position: absolute;
-    top: 5%;
-    left: 5%;
-    right: 5%;
-    bottom: 5%;
-    border-radius: 10px;
-    background-color: white;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    overflow: hidden;
-    overflow-y: auto;
-    grid-template-rows: 1fr;
-}
-
-.modal .move-buttons-container {
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    pointer-events: none;
-}
-
-.modal .dots-container {
-    position: relative;
-    bottom: -4%;
-    display: flex;
-    justify-content: center;
-}
-
-.modal .dot {
-    width: 10px;
-    height: 10px;
-    margin: 0 5px;
-    border-radius: 50%;
-    background-color: #003366;
-    opacity: 0.5;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.modal .dot.active {
-    opacity: 1;
-}
-
-.modal .content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    margin-left: 1rem;
-}
-
-.modal .content h2 {
-    text-align: center;
-    margin-right: 3rem;
-    margin-top: 2rem;
-}
-
-.modal .content .features {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.modal .content .features .feature {
-    border: 1px solid #ddd;
-    border-left: 4px solid #0056b3;
-    padding: 5px 5px 5px 1rem;
-    margin: 1.5vh 4rem 1.5vh 1rem;
-}
-
-.modal .content h3 {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.modal .content a {
-    color: blue;
-}
-
-.modal .close-icon {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    width: 1.5rem;
-    height: 1.5rem;
-    cursor: pointer;
-    transition: transform 0.3s;
-}
-
-.modal .close-icon:hover {
-    transform: rotate(90deg) scale(1.15);
-}
-
-.modal .move-buttons {
-    width: 4rem;
-    height: 4rem;
-    pointer-events: auto;
-    background: none;
-    border: none;
-    padding: 10px;
-    margin: 1rem;
-    cursor: pointer;
-    z-index: 2;
-    transition: 0.5s;
-    opacity: 0.7;
-}
-
-.modal .move-buttons:hover {
-    scale: 1.2;
-    opacity: 1;
-}
-
-.modal .move-buttons img {
-    object-fit: contain;
-    width: 100%;
-    height: 100%;
-}
-
 @media (max-width: 1024px) {
     .product-card-container > .content {
         display: flex;
@@ -238,48 +103,6 @@
         max-width: 70%;
         object-fit: contain;
     }
-
-    .modal {
-        left: 0;
-        right: 0;
-        bottom: -5px;
-        top: 10vh;
-        border-radius: 2% 2% 0 0;
-        grid-template-columns: 1fr;
-        grid-template-rows: 55vh auto 1fr;
-    }
-
-    .modal .closer {
-        position: absolute;
-        top: 0;
-        right: 1vh;
-    }
-
-    .modal .closer img {
-        position: relative;
-        object-fit: fill;
-        width: 3vh;
-        height: 3vh;
-    }
-
-    .modal .move-buttons-container {
-        opacity: 1 !important;
-    }
-
-    .modal .move-buttons-container .move-buttons {
-        opacity: 1;
-    }
-
-    .modal .move-buttons-container .move-buttons:hover {
-        scale: none;
-    }
-}
-
-@media (max-width: 600px) {
-    .modal {
-        top: 5vh !important;
-        grid-template-rows: 40vh auto 1fr !important;
-    }
 }
 
 @media (max-width: 900px) {
@@ -289,7 +112,6 @@
 }
 
 @media (max-width: 768px) {
-
     .product-card-container img {
         min-width: 90% !important;
     }
