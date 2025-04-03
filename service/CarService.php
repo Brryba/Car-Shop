@@ -1,6 +1,6 @@
 <?php
 
-namespace service;
+namespace Service;
 
 class carService
 {

@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Каталог автомобилей</title>
-    <link rel="stylesheet" type="text/css" href="/view/css/index.css">
-    <link rel="stylesheet" type="text/css" href="/view/css/ProductCard.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/ProductCard.css">
 </head>
 <body>
 <h1 class="main-header">Каталог автомобилей</h1>
@@ -22,7 +22,7 @@
                 <h3>Цена: 35,000 $</h3>
             </div>
             <div class="photo">
-                <img src="/view/images/car1/pic1.png" alt="Фото не найдено.">
+                <img src="/public/images/car1/pic1.png" alt="Фото не найдено.">
             </div>
         </div>
     </div>
@@ -38,7 +38,7 @@
                 <h3>Цена: 17,000 $</h3>
             </div>
             <div class="photo">
-                <img src="/view/images/car2/pic1.png" alt="Фото не найдено.">
+                <img src="/public/images/car2/pic1.png" alt="Фото не найдено.">
             </div>
         </div>
     </div>
@@ -55,7 +55,7 @@
                 <h3>Цена: 4,800 $</h3>
             </div>
             <div class="photo">
-                <img src="/view/images/car3/pic1.png" alt="Фото не найдено.">
+                <img src="/public/images/car3/pic1.png" alt="Фото не найдено.">
             </div>
         </div>
     </div>
@@ -72,7 +72,7 @@
                 <h3>Цена: 41,200 $</h3>
             </div>
             <div class="photo">
-                <img src="/view/images/car4/pic1.png" alt="Фото не найдено.">
+                <img src="/public/images/car4/pic1.png" alt="Фото не найдено.">
             </div>
         </div>
     </div>
@@ -89,7 +89,7 @@
                 <h3>Цена: 18,300 $</h3>
             </div>
             <div class="photo">
-                <img src="/view/images/car5/pic1.png" alt="Фото не найдено.">
+                <img src="/public/images/car5/pic1.png" alt="Фото не найдено.">
             </div>
         </div>
     </div>
@@ -106,7 +106,7 @@
                 <h3>Цена: 42,500 $</h3>
             </div>
             <div class="photo">
-                <img src="/view/images/car6/pic1.png" alt="Фото не найдено.">
+                <img src="/public/images/car6/pic1.png" alt="Фото не найдено.">
             </div>
         </div>
     </div>

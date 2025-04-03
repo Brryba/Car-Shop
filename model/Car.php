@@ -1,52 +1,52 @@
-<?php
+<?php declare(strict_types = 1);
 
-namespace model;
+namespace Model;
 
 class Car
 {
-    private $id;
-    private $name;
-    private $features;
-    private $photoPath;
-    public function getId()
+    private int $id;
+    private string $name;
+    private array $features;
+    private string $photoPath;
+    public function getId(): int
     {
         return $this->id;
     }
-    public function setId($id)
+    public function setId(int $id)
     {
         $this->id = $id;
     }
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
 
-    public function getFeatures()
+    public function getFeatures(): array
     {
         return $this->features;
     }
 
-    public function setFeatures($features)
+    public function setFeatures(array $features)
     {
         $this->features = $features;
     }
 
-    public function getPhotoPath()
+    public function getPhotoPath(): string
     {
         return $this->photoPath;
     }
 
-    public function setPhotoPath($photoPath)
+    public function setPhotoPath(string $photoPath)
     {
         $this->photoPath = $photoPath;
     }
 
-    function __construct($id, $name, $features, $photoPath)
+    function __construct(int $id, string $name, array $features, string $photoPath)
     {
         $this->id = $id;
         $this->name = $name;

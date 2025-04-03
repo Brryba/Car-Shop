@@ -1,35 +1,46 @@
-<?php
+<?php declare(strict_types = 1);
 
-namespace router;
+namespace Router;
+
+use BaseController;
+use CatalogController;
+
+require_once __DIR__ . "/../controller/CatalogController.php";
 
 class Router
 {
-    private $GETDict = [
-        "/" => "view/html/index.html"
+    private array $GETDict = [
+        "/" => CatalogController::class,
     ];
 
-    private function handleGET($path)
+    private function findGetController($path): ?BaseController
     {
         if (isset($this->GETDict[$path])) {
-            $newPage = $this->GETDict[$path];
-            require $newPage;
+            $controllerClass = $this->GETDict[$path];
+            return new $controllerClass();
         }
         else {
-            echo "Error 404. Page not found";
+            return null;
         }
     }
 
     public function handle($method, $path)
     {
+        $controller = null;
         switch ($method) {
             case "GET":
-                $this->handleGET($path);
+                $controller = $this->findGetController($path);
             case "POST":
                 //
             case "PUT":
                 //
             case "DELETE":
                 //
+        }
+        if ($controller != null) {
+            echo $controller->execute();
+        } else {
+            echo "Error 404 Requested page not found!";
         }
     }
 }

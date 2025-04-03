@@ -1,8 +1,6 @@
-<?php
+<?php declare(strict_types=1);
 
-//echo $_SERVER["REQUEST_URI"];
-
-use router\Router;
+use Router\Router;
 
 require_once __DIR__ . "/router/Router.php";
 

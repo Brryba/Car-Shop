@@ -1,27 +1,27 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace repository;
 
-use model\Car;
+use Model\Car;
 
 require_once __DIR__ . "/../model/Car.php";
 
 class carRepository
 {
-    function add($car)
+    function add(Car $car)
     {
 
     }
 
-    function getAll()
+    function getAll(): array
+    {
+        return [];
+    }
+
+    function update(Car $car)
     {
 
     }
 
-    function update($car)
-    {
-
-    }
-
-    function delete($id) {}
+    function delete(int $id) {}
 }
