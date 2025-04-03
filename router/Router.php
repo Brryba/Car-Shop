@@ -18,6 +18,7 @@ class Router
 
     private function findGetController($path): ?BaseController
     {
+        $path = strtok($path, "?");
         if (isset($this->GETDict[$path])) {
             $controllerClass = $this->GETDict[$path];
             return new $controllerClass();
