@@ -4,13 +4,16 @@ namespace Router;
 
 use BaseController;
 use CatalogController;
+use AdminController;
 
 require_once __DIR__ . "/../controller/CatalogController.php";
+require_once __DIR__ . "/../controller/AdminController.php";
 
 class Router
 {
     private array $GETDict = [
         "/" => CatalogController::class,
+        "/admin" => AdminController::class,
     ];
 
     private function findGetController($path): ?BaseController
