@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Каталог автомобилей</title>
-    <link rel="stylesheet" type="text/css" href="/public/css/index.css">
-    <link rel="stylesheet" type="text/css" href="/public/css/ProductCard.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/product-card.css">
 </head>
 <body>
 <h1 class="main-header">Каталог автомобилей</h1>

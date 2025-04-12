@@ -6,6 +6,6 @@ class CatalogService
 {
     public function createCatalogPage()
     {
-        return file_get_contents(__DIR__ . "/../public/templates/catalog.tpl");
+        return file_get_contents(__DIR__ . "/../public/templates/car/catalog.tpl");
     }
 }
