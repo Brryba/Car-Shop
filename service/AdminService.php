@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Service;
 
@@ -18,6 +18,20 @@ class AdminService
     {
         $this->templateEngine = new TemplateEngine();
         $this->basePath = $_SERVER["DOCUMENT_ROOT"] . "/public";
+    }
+
+    private function getProjectPath($path): string
+    {
+        return str_replace($this->basePath, "", $path);
+    }
+
+    private function setBackPage($path): void
+    {
+        $isMain = ($path === $this->basePath);
+        $this->templateEngine->setBoolValue("isNotMain", !$isMain);
+        if ($isMain) return;
+        $this->templateEngine->setStringValue("backPage",
+            str_replace("/" . basename($path), "", $this->getProjectPath($path)));
     }
 
     private function canAccess($path): bool
@@ -65,14 +79,14 @@ class AdminService
 
     private function setLinksPath(string $path): void
     {
-        $path = str_replace($this->basePath, "", $path);
+        $path = $this->getProjectPath($path);
         $pathParts = explode("/", $path);
         $pathParts = array_values(array_diff($pathParts, [""]));
 
-        $linksForTemplate = [["href" => "public", "name" => "Главная"]];
-        $fullPath = "public/";
+        $linksForTemplate = [["href" => "", "name" => "Главная"]];
+        $fullPath = "";
         for ($i = 0; $i < count($pathParts); $i++) {
-            $fullPath .= $pathParts[$i] . "/";
+            $fullPath .= "/" . $pathParts[$i];
             $newLink = ["href" => $fullPath, "name" => $pathParts[$i]];
             $linksForTemplate[] = $newLink;
         }
@@ -86,11 +100,29 @@ class AdminService
         foreach ($files as $file) {
             if ($file === ".") continue;
             if ($file === ".." && !$this->canAccess($file)) continue;
-            if (!$this->isCorrectExtension($this->basePath . "/" . $file)) continue;
             $filesDataForTemplate[] = ["name" => basename($file),
-                "icon" => is_file($path . "/" . $file) ? "📄" : "📁"];
+                "icon" => is_file($path . "/" . $file) ? "📄" : "📁",
+                "path" => $this->getProjectPath($path) . "/" . $file];
         }
         $this->templateEngine->setArrayValue("files", $filesDataForTemplate);
+    }
+
+    private function setFile($path): void
+    {
+        $extension = pathinfo($path, PATHINFO_EXTENSION);
+        $isImage = $extension === "png" || $extension === "jpg" || $extension === "jpeg";
+        $this->templateEngine->setBoolValue("isImage", $isImage);
+        $this->templateEngine->setBoolValue("isText", !$isImage);
+        $this->templateEngine->setStringValue("fileName", basename($path));
+        $this->templateEngine->setStringValue("fileType", $extension);
+        $this->templateEngine->setStringValue("fileSize", (string)filesize($path));
+        if (!$isImage) {
+            $this->templateEngine->setStringValue("fileContent",
+                file_get_contents($path));
+        } else {
+            $this->templateEngine->setStringValue("filePath",
+                $this->getProjectPath($path) . "/public");
+        }
     }
 
     /**
@@ -104,10 +136,13 @@ class AdminService
 
         $this->templateEngine->refresh();
         $this->setLinksPath($path);
+        $this->setBackPage($path);
         if ($this->isDirectory($path)) {
             $this->setDirectoryFiles($path);
+        } else {
+            $this->setFile($path);
         }
-        $template = file_get_contents(__DIR__ . "/../public/templates/admin/admin.tpl");
+        $template = file_get_contents(__DIR__ . "/../public/templates/admin.tpl");
         return $this->templateEngine->createTemplate($template);
     }
 }

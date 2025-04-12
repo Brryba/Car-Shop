@@ -21,7 +21,7 @@
                 <h3>Цена: 35,000 $</h3>
             </div>
             <div class="photo">
-                <img src="/public/images/car1/pic1.png" alt="Фото не найдено.">
+                <img src="/public/images/car1.png" alt="Фото не найдено.">
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@
                 <h3>Цена: 17,000 $</h3>
             </div>
             <div class="photo">
-                <img src="/public/images/car2/pic1.png" alt="Фото не найдено.">
+                <img src="/public/images/car2.png" alt="Фото не найдено.">
             </div>
         </div>
     </div>
@@ -54,7 +54,7 @@
                 <h3>Цена: 4,800 $</h3>
             </div>
             <div class="photo">
-                <img src="/public/images/car3/pic1.png" alt="Фото не найдено.">
+                <img src="/public/images/car3.png" alt="Фото не найдено.">
             </div>
         </div>
     </div>
@@ -71,7 +71,7 @@
                 <h3>Цена: 41,200 $</h3>
             </div>
             <div class="photo">
-                <img src="/public/images/car4/pic1.png" alt="Фото не найдено.">
+                <img src="/public/images/car4.png" alt="Фото не найдено.">
             </div>
         </div>
     </div>
@@ -88,7 +88,7 @@
                 <h3>Цена: 18,300 $</h3>
             </div>
             <div class="photo">
-                <img src="/public/images/car5/pic1.png" alt="Фото не найдено.">
+                <img src="/public/images/car5.png" alt="Фото не найдено.">
             </div>
         </div>
     </div>
@@ -105,7 +105,7 @@
                 <h3>Цена: 42,500 $</h3>
             </div>
             <div class="photo">
-                <img src="/public/images/car6/pic1.png" alt="Фото не найдено.">
+                <img src="/public/images/car6.png" alt="Фото не найдено.">
             </div>
         </div>
     </div>
