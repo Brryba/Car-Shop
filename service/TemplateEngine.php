@@ -14,6 +14,12 @@ class TemplateEngine
     {
     }
 
+    public function refresh(): void
+    {
+        $this->values = [];
+        $this->arrayValues = [];
+    }
+
     public function setStringValue(string $key, string $value): void
     {
         $this->values[$key] = $value;
@@ -89,10 +95,9 @@ class TemplateEngine
 
     public function createTemplate(string $template): string
     {
-        $template = $this->replaceForEach($template);
         $template = $this->replaceIfElse($template);
         $template = $this->replaceIf($template);
-        $template = $this->replaceSingleElement($template);
-        return $template;
+        $template = $this->replaceForEach($template);
+        return $this->replaceSingleElement($template);
     }
 }
