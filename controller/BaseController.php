@@ -3,5 +3,5 @@
 
 interface BaseController
 {
-    function execute();
+    function showAdminFileManager();
 }

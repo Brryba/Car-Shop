@@ -15,8 +15,8 @@
 
             @if ({{isDirectory}})
             <div>
-                <button class="btn btn-primary" id="addFile">Добавить файл</button>
-                <button class="btn btn-secondary" id="addFile">Создать папку</button>
+                <button class="btn btn-primary" id="addFile" onclick="createFile('{{currDir}}')">Добавить файл</button>
+                <button class="btn btn-secondary" id="addFile" onclick="createDirectory('{{currDir}}')">Создать папку</button>
             </div>
             @endif
 
@@ -45,7 +45,7 @@
                     <span class="file-name" onclick="redirect('{{file.path}}')">{{file.name}}</span>
                     <div class="file-actions">
                         <button class="btn btn-primary" onclick="redirect('{{file.path}}')">Открыть</button>
-                        <button class="btn btn-danger">Удалить</button>
+                        <button class="btn btn-danger" onclick="deleteFile('{{file.path}}', false)">Удалить</button>
                     </div>
                 </div>
                 @endforeach
@@ -69,18 +69,18 @@
 
                     @if ({{isText}})
                     <label>
-                        <textarea>{{fileContent}}</textarea>
+                        <textarea id="text">{{fileContent}}</textarea>
                     </label>
                     @endif
 
                 </div>
 
                 <div class="file-actions">
-                    <button class="btn btn-primary">Скачать</button>
-                    <button class="btn btn-danger">Удалить</button>
+                    <button class="btn btn-primary" >Скачать</button>
+                    <button class="btn btn-danger" onclick="deleteFile('{{fileFullName}}', true)">Удалить</button>
 
                     @if ({{isText}})
-                    <button class="btn btn-warning">Сохранить</button>
+                    <button class="btn btn-warning" onclick="updateFile('{{fileFullName}}')">Сохранить</button>
                     @endif
 
                 </div>
@@ -88,7 +88,10 @@
             @endifelse
         </div>
     </div>
-    <script src="/public/js/adminSendRequest.js"></script>
+    <script src="/public/js/adminRedirector.js"></script>
+    <script src="/public/js/adminFilesCreator.js"></script>
+    <script src="/public/js/adminDeleteFile.js"></script>
+    <script src="/public/js/adminUpdateFile.js"></script>
 </div>
 </body>
 </html>

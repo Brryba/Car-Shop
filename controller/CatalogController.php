@@ -8,7 +8,7 @@ require_once __DIR__ . "/../service/CatalogService.php";
 class CatalogController implements BaseController
 {
     private CatalogService $catalogService;
-    public function execute()
+    public function showAdminFileManager()
     {
         return $this->catalogService->createCatalogPage();
     }

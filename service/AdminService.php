@@ -2,7 +2,7 @@
 
 namespace Service;
 
-use Exception;
+use Exception\FileExistsException;
 use Exception\IncorrectExtensionException;
 use Exception\FileNotFoundException;
 use Exception\FileNotAllowedException;
@@ -20,7 +20,7 @@ class AdminService
         $this->basePath = $_SERVER["DOCUMENT_ROOT"] . "/public";
     }
 
-    private function getProjectPath($path): string
+    private function removeProjectPath($path): string
     {
         return str_replace($this->basePath, "", $path);
     }
@@ -31,7 +31,7 @@ class AdminService
         $this->templateEngine->setBoolValue("isNotMain", !$isMain);
         if ($isMain) return;
         $this->templateEngine->setStringValue("backPage",
-            str_replace("/" . basename($path), "", $this->getProjectPath($path)));
+            str_replace("/" . basename($path), "", $this->removeProjectPath($path)));
     }
 
     private function canAccess($path): bool
@@ -79,7 +79,7 @@ class AdminService
 
     private function setLinksPath(string $path): void
     {
-        $path = $this->getProjectPath($path);
+        $path = $this->removeProjectPath($path);
         $pathParts = explode("/", $path);
         $pathParts = array_values(array_diff($pathParts, [""]));
 
@@ -97,12 +97,13 @@ class AdminService
     {
         $files = scandir($path);
         $filesDataForTemplate = [];
+        $this->templateEngine->setStringValue("currDir", $this->removeProjectPath($path));
         foreach ($files as $file) {
             if ($file === ".") continue;
             if ($file === ".." && !$this->canAccess($file)) continue;
             $filesDataForTemplate[] = ["name" => basename($file),
                 "icon" => is_file($path . "/" . $file) ? "📄" : "📁",
-                "path" => $this->getProjectPath($path) . "/" . $file];
+                "path" => $this->removeProjectPath($path) . "/" . $file];
         }
         $this->templateEngine->setArrayValue("files", $filesDataForTemplate);
     }
@@ -114,14 +115,12 @@ class AdminService
         $this->templateEngine->setBoolValue("isImage", $isImage);
         $this->templateEngine->setBoolValue("isText", !$isImage);
         $this->templateEngine->setStringValue("fileName", basename($path));
+        $this->templateEngine->setStringValue("fileFullName", $this->removeProjectPath($path));
         $this->templateEngine->setStringValue("fileType", $extension);
         $this->templateEngine->setStringValue("fileSize", (string)filesize($path));
         if (!$isImage) {
             $this->templateEngine->setStringValue("fileContent",
                 file_get_contents($path));
-        } else {
-            $this->templateEngine->setStringValue("filePath",
-                $this->getProjectPath($path) . "/public");
         }
     }
 
@@ -144,5 +143,61 @@ class AdminService
         }
         $template = file_get_contents(__DIR__ . "/../public/templates/admin.tpl");
         return $this->templateEngine->createTemplate($template);
+    }
+
+    /**
+     * @throws FileNotFoundException
+     * @throws FileNotAllowedException
+     * @throws FileExistsException
+     */
+    public function createDirectory(string $newDir, string $path): void
+    {
+        $fullPath = $this->getFullPath($path) . "/" . $newDir;
+        if (file_exists($fullPath)) {
+            throw new FileExistsException();
+        }
+        mkdir($fullPath);
+    }
+
+    /**
+     * @throws FileExistsException
+     * @throws FileNotFoundException
+     * @throws IncorrectExtensionException
+     * @throws FileNotAllowedException
+     */
+    public function createFile(string $newFile, string $path): void
+    {
+        $fullPath = $this->getFullPath($path) . "/" . $newFile;
+        if (file_exists($fullPath)) {
+            throw new FileExistsException();
+        }
+        $file = fopen($fullPath, "x");
+        fclose($file);
+    }
+
+    /**
+     * @throws FileNotFoundException
+     */
+    public function updateFile($fileName, $newText): void
+    {
+        $fullPath = $this->basePath . $fileName;
+        if (!file_exists($fullPath)) {
+            throw new FileNotFoundException();
+        }
+        $file = fopen($fullPath, "w");
+        fwrite($file, $newText);
+        fclose($file);
+    }
+
+    /**
+     * @throws FileNotFoundException
+     */
+    public function deleteFile(string $fileName): void
+    {
+        $fullPath = $this->basePath . $fileName;
+        if (!file_exists($fullPath)) {
+            throw new FileNotFoundException();
+        }
+        is_dir($fullPath) ? system("rm -rf ".escapeshellarg($fullPath)) : unlink($fullPath);
     }
 }

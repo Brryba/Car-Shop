@@ -1,50 +1,58 @@
-<?php declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace Router;
 
-use BaseController;
 use CatalogController;
 use AdminController;
+use Exception\FileExistsException;
 
 require_once __DIR__ . "/../controller/CatalogController.php";
 require_once __DIR__ . "/../controller/AdminController.php";
 
 class Router
 {
-    private array $GETDict = [
-        "/" => CatalogController::class,
-        "/admin" => AdminController::class,
+    private array $routes = [
+        "GET" => [
+            "/" => ["controller" => CatalogController::class, "function" => ""],
+            "/admin" => ["controller" => AdminController::class, "function" => "showAdminFileManager"]
+        ], "POST" => [
+            "/admin/api/createFile" => ["controller" => AdminController::class, "function" => "createFile"],
+            "/admin/api/createDir" => ["controller" => AdminController::class, "function" => "createDirectory"],
+        ], "PUT" => [
+            "/admin/api/updateFile" => ["controller" => AdminController::class, "function" => "updateFile"]
+        ], "DELETE" => [
+            "/admin/api/deleteFile" => ["controller" => AdminController::class, "function" => "deleteFile"],
+        ]
     ];
 
-    private function findGetController($path): ?BaseController
+    public function handle(string $method, string $path): void
     {
-        $path = strtok($path, "?");
-        if (isset($this->GETDict[$path])) {
-            $controllerClass = $this->GETDict[$path];
-            return new $controllerClass();
+        $simplePath = strtok($path, "?") ?: "/";
+
+        if (!isset($this->routes[$method][$simplePath])) {
+            $this->showError();
+            return;
         }
-        else {
-            return null;
+        $action = $this->routes[$method][$simplePath];
+
+        if ($action === null) {
+            $this->showError();
+            return;
+        }
+
+        $controller = new $action["controller"]();
+        $func = $action["function"];
+        try {
+            echo $controller->$func();
+        } catch (\Exception|FileExistsException $e) {
+            http_response_code($e->getCode());
+            echo $e->getMessage();
         }
     }
 
-    public function handle($method, $path)
+    private function showError(): void
     {
-        $controller = null;
-        switch ($method) {
-            case "GET":
-                $controller = $this->findGetController($path);
-            case "POST":
-                //
-            case "PUT":
-                //
-            case "DELETE":
-                //
-        }
-        if ($controller != null) {
-            echo $controller->execute();
-        } else {
-            echo "Error 404 Requested page not found!";
-        }
+        http_response_code(404);
+        echo "Error 404: Requested page not found";
     }
 }
