@@ -12,7 +12,7 @@ require_once __DIR__ . "/../exception/FileNotAllowedException.php";
 require_once __DIR__ . "/../exception/IncorrectExtensionException.php";
 require_once __DIR__ . "/../exception/FileExistsException.php";
 
-class AdminController implements BaseController
+class AdminController
 {
     private AdminService $adminService;
 

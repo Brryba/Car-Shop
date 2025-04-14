@@ -13,7 +13,7 @@ class Router
 {
     private array $routes = [
         "GET" => [
-            "/" => ["controller" => CatalogController::class, "function" => ""],
+            "/" => ["controller" => CatalogController::class, "function" => "showCatalogPage"],
             "/admin" => ["controller" => AdminController::class, "function" => "showAdminFileManager"]
         ], "POST" => [
             "/admin/api/createFile" => ["controller" => AdminController::class, "function" => "createFile"],

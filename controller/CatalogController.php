@@ -5,10 +5,10 @@ use Service\CatalogService;
 require_once __DIR__ . "/BaseController.php";
 require_once __DIR__ . "/../service/CatalogService.php";
 
-class CatalogController implements BaseController
+class CatalogController
 {
     private CatalogService $catalogService;
-    public function showAdminFileManager()
+    public function showCatalogPage()
     {
         return $this->catalogService->createCatalogPage();
     }
