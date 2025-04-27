@@ -13,14 +13,8 @@
     </a>
 
     <form class="search-form" action="/user" method="GET">
-        <input
-                type="text"
-                class="search-input"
-                name="name"
-                placeholder="Введите имя..."
-                required
-        >
-        <button type="submit" class="search-btn">Найти</button>
+        <input type="text" class="search-input" name="name" placeholder="Введите имя..." required>
+        <button type="submit" class="search-btn">Мои</button>
     </form>
 </div>
 
@@ -36,8 +30,10 @@
                 <h3>{{car.price}}</h3>
                 @if ({{isOwn}})
                 <div class="actions">
-                    <button class="btn btn-edit">Редактировать</button>
-                    <button class="btn btn-delete">Удалить</button>
+                    <a href="/update?id={{car.id}}">
+                        <button class="btn btn-edit">Редактировать</button>
+                    </a>
+                    <button class="btn btn-delete" data-car-id="{{car.id}}">Удалить</button>
                 </div>
                 @endif
             </div>
@@ -48,8 +44,6 @@
     </div>
     @endforeach
 </div>
-
-<script>
-</script>
 </body>
+<script src="/public/js/deleteCar.js"></script>
 </html>

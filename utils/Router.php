@@ -2,27 +2,30 @@
 
 namespace Router;
 
-use CatalogController;
+use CarsController;
 use AdminController;
 use Exception\FileExistsException;
 
-require_once __DIR__ . "/../controller/CatalogController.php";
+require_once __DIR__ . "/../controller/CarsController.php";
 require_once __DIR__ . "/../controller/AdminController.php";
 
 class Router
 {
     private array $routes = [
         "GET" => [
-            "/" => ["controller" => CatalogController::class, "function" => "showCatalogPage"],
+            "/" => ["controller" => CarsController::class, "function" => "showCatalogPage"],
             "/admin" => ["controller" => AdminController::class, "function" => "showAdminFileManager"],
-            "/user" => ["controller" => CatalogController::class, "function" => "showUserCatalogPage"],
+            "/user" => ["controller" => CarsController::class, "function" => "showUserCatalogPage"],
+            "/new" => ["controller" => CarsController::class, "function" => "showCreatePage"],
+            "/update" => ["controller" => CarsController::class, "function" => "showUpdatePage"],
         ], "POST" => [
             "/admin/api/createFile" => ["controller" => AdminController::class, "function" => "createFile"],
             "/admin/api/createDir" => ["controller" => AdminController::class, "function" => "createDirectory"],
         ], "PUT" => [
-            "/admin/api/updateFile" => ["controller" => AdminController::class, "function" => "updateFile"]
+            "/admin/api/updateFile" => ["controller" => AdminController::class, "function" => "updateFile"],
         ], "DELETE" => [
             "/admin/api/deleteFile" => ["controller" => AdminController::class, "function" => "deleteFile"],
+            "/api/car/delete" => ["controller" => CarsController::class, "function" => "deleteCar"],
         ]
     ];
 
