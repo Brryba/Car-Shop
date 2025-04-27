@@ -7,7 +7,7 @@ use Exception\IncorrectExtensionException;
 use Exception\FileNotFoundException;
 use Exception\FileNotAllowedException;
 
-require_once __DIR__ . "/TemplateEngine.php";
+require_once __DIR__ . "/../engine/TemplateEngine.php";
 
 class AdminService
 {

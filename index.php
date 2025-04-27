@@ -2,7 +2,7 @@
 
 use Router\Router;
 
-require_once __DIR__ . "/router/Router.php";
+require_once __DIR__ . "/utils/Router.php";
 
 $router = new Router();
 $router->handle($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);

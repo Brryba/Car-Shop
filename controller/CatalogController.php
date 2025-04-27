@@ -2,7 +2,6 @@
 
 use Service\CatalogService;
 
-require_once __DIR__ . "/BaseController.php";
 require_once __DIR__ . "/../service/CatalogService.php";
 
 class CatalogController
@@ -10,7 +9,13 @@ class CatalogController
     private CatalogService $catalogService;
     public function showCatalogPage()
     {
-        return $this->catalogService->createCatalogPage();
+        return $this->catalogService->showAll();
+    }
+
+    public function showUserCatalogPage()
+    {
+        $userName = $_GET['name'];
+        return $this->catalogService->showAllUserCars($userName);
     }
 
     public function __construct()
